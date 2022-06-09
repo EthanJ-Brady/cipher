@@ -1,0 +1,59 @@
+$background-color: #121212
+$default-spacing: 1.25rem
+$text-color: white
+$title-height: 15vh
+$card-color: #301934
+    
+body
+    background-color: $background-color
+    
+#codenames-grid
+    display: grid
+    grid-template-columns: repeat(5, 1fr)
+    grid-template-rows: repeat(5, 1fr)
+    grid-gap: $default-spacing $default-spacing
+
+    height: calc(100vh - $title-height - $default-spacing)
+    margin-left: $default-spacing
+    margin-right: $default-spacing
+    margin-bottom: $default-spacing
+
+.codenames-card
+    display: grid
+    justify-content: center
+    align-items: center
+    height: auto
+
+    text-align: center
+
+    border-style: solid
+    border-color: white
+    border-width: $default-spacing / 2
+    border-radius: $default-spacing
+
+    color: $text-color
+    background-color: $card-color
+
+.codenames-card:hover > .dark-screen
+    display: block
+    position: absolute
+    background-color: black
+    opacity: 20%
+
+.codenames-card > .dark-screen
+    display: none
+
+.codenames-card-container
+    display: grid
+    width: 100%
+    height: auto
+
+#title
+    display: grid
+    align-items: center
+
+    width: 100%
+    height: $title-height
+
+    color: $text-color
+    text-align: center
