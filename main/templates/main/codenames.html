@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Star Wars Codenames Gameboard</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+    </head>
+    <body>
+        <div id="header">
+            <div id="back-button">
+                <a href="{% url 'index' %}">
+                    <button type="button" class="btn btn-primary">Generate New Board</button>
+                </a>
+            </div>
+            <h1 id="title">Star Wars Codenames</h1>
+            <div id="options">
+                {% if viewing_solution == "true" %}
+                    <a href="{% url 'gameboard' %}?seed={{ seed }}">
+                        <button type="button" class="btn btn-light">View Gameboard</button>
+                    </a>
+                {% else %}
+                    <a href="{% url 'gameboard' %}?seed={{ seed }}&solution=true">
+                        <button type="button" class="btn btn-light">View Solution</button>
+                    </a>
+                {% endif %}
+                <div id="seed">Seed: {{ seed }}</div>
+            </div>
+        </div>
+        <div id="codenames-grid">
+            {% for card in card_list %}
+                <div class="card text-center bg-secondary {{ click_option }} {{ card.type }}" onclick="clickCard(this);">
+                    <div class="card card-screen"></div>
+                    <h3 class ="card-text">{{ card.title }}</h3>
+                </div>
+            {% endfor %}
+        </div>
+
+        <script>
+            function clickCard(e) {
+                e.classList.add('clicked-card');
+                e.classList.remove('unclicked-card');
+            }
+        </script>
+    </body>
+</html>

@@ -1,11 +1,11 @@
 $background-color: #121212
 $default-spacing: 1.25rem
 $text-color: white
-$title-height: 15vh
-$card-color: #301934
+$grid-height: 85vh
     
 body
     background-color: $background-color
+    color: $text-color
     
 #codenames-grid
     display: grid
@@ -13,47 +13,74 @@ body
     grid-template-rows: repeat(5, 1fr)
     grid-gap: $default-spacing $default-spacing
 
-    height: calc(100vh - $title-height - $default-spacing)
+    height: calc($grid-height - $default-spacing)
     margin-left: $default-spacing
     margin-right: $default-spacing
     margin-bottom: $default-spacing
 
-.codenames-card
+/* CSS styling for the cards */
+
+.card
+    display: grid
+    position: relative
+    align-items: center
+    -webkit-text-stroke-width: 1px
+    -webkit-text-stroke-color: black
+
+.card-screen
+    display: none
+    position: absolute
+    background-color: black
+    width: 100%
+    height: 100%
+    opacity: 50%
+
+.unclicked-card:hover
+    .card-screen
+        display: block
+
+.clicked-card
+    .card-screen
+        display: block
+        opacity: 100%
+
+    .card-text
+        opacity: 50%
+
+.clicked-card.red
+    .card-screen
+        background-color: red
+
+.clicked-card.blue
+    .card-screen
+        background-color: blue
+
+.clicked-card.nuetral
+    .card-screen
+        background-color: silver
+        
+.clicked-card.nuetral
+    .card-screen
+        background-color: dark-gray
+
+/* End of styling for cards */
+
+#begin-menu
     display: grid
     justify-content: center
     align-items: center
-    height: auto
-
+    width: 100%
+    height: 100vh
     text-align: center
 
-    border-style: solid
-    border-color: white
-    border-width: $default-spacing / 2
-    border-radius: $default-spacing
-
-    color: $text-color
-    background-color: $card-color
-
-.codenames-card:hover > .dark-screen
-    display: block
-    position: absolute
-    background-color: black
-    opacity: 20%
-
-.codenames-card > .dark-screen
-    display: none
-
-.codenames-card-container
+#header
     display: grid
-    width: 100%
-    height: auto
-
-#title
-    display: grid
+    grid-template-columns: 1fr 2fr 1fr
     align-items: center
 
-    width: 100%
-    height: $title-height
+    padding: $default-spacing
 
-    color: $text-color
     text-align: center
+
+#seed
+    opacity: 50%

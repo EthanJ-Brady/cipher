@@ -10,17 +10,16 @@
         <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
     </head>
     <body>
-        <div id="title">
-            <h1>Star Wars Codenames</h1>
-        </div>
-        <div id="codenames-grid">
-            {% for i in '0123456789012345678901234'|make_list %}
-                <div class="codenames-card-container">
-                    <div class="codenames-card">
-                        <h3>Payton is a witch and stuff</h3>
-                    </div>
+        <div id="begin-menu">
+            <form method="GET" action="/codenames/gameboard/">
+                <div class="form-group">
+                    <h3>Enter Seed<h3>
+                    <input class="form-control form-control-lg" type="text" name="seed" value={{ seed }}>
                 </div>
-            {% endfor %}
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary btn-lg">Begin</button>
+                </div>
+            </form>
         </div>
     </body>
 </html>

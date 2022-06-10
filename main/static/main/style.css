@@ -1,5 +1,6 @@
 body {
   background-color: #121212;
+  color: white;
 }
 
 #codenames-grid {
@@ -13,44 +14,72 @@ body {
   margin-bottom: 1.25rem;
 }
 
-.codenames-card {
+/* CSS styling for the cards */
+.card {
+  display: grid;
+  position: relative;
+  align-items: center;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+.card-screen {
+  display: none;
+  position: absolute;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  opacity: 50%;
+}
+
+.unclicked-card:hover .card-screen {
+  display: block;
+}
+
+.clicked-card .card-screen {
+  display: block;
+  opacity: 100%;
+}
+.clicked-card .card-text {
+  opacity: 50%;
+}
+
+.clicked-card.red .card-screen {
+  background-color: red;
+}
+
+.clicked-card.blue .card-screen {
+  background-color: blue;
+}
+
+.clicked-card.nuetral .card-screen {
+  background-color: silver;
+}
+
+.clicked-card.nuetral .card-screen {
+  background-color: dark-gray;
+}
+
+/* End of styling for cards */
+#begin-menu {
   display: grid;
   justify-content: center;
   align-items: center;
-  height: auto;
-  text-align: center;
-  border-style: solid;
-  border-color: white;
-  border-width: 0.625rem;
-  border-radius: 1.25rem;
-  color: white;
-  background-color: #301934;
-}
-
-.codenames-card:hover > .dark-screen {
-  display: block;
-  position: absolute;
-  background-color: black;
-  opacity: 20%;
-}
-
-.codenames-card > .dark-screen {
-  display: none;
-}
-
-.codenames-card-container {
-  display: grid;
   width: 100%;
-  height: auto;
+  height: 100vh;
+  text-align: center;
 }
 
-#title {
+#header {
   display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
-  width: 100%;
-  height: 15vh;
-  color: white;
+  padding: 1.25rem;
   text-align: center;
+}
+
+#seed {
+  opacity: 50%;
 }
 
 /*# sourceMappingURL=style.css.map */
