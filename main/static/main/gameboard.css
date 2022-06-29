@@ -1,0 +1,200 @@
+body {
+  background-color: #282828;
+  color: white;
+  margin: 8px;
+}
+
+.shadow, .codename-card {
+  box-shadow: 3px 3px 3px black;
+}
+
+.large-text {
+  font-size: 6vh;
+}
+
+.medium-text {
+  font-size: 4vh;
+}
+
+.small-text {
+  font-size: 2vh;
+}
+
+.micro-text {
+  font-size: 1.5vh;
+}
+
+/*Styling for the gameboard*/
+#gameboard {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-column-gap: 1.25rem;
+}
+
+/*Styling for the header*/
+#header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+/*Styling for the seed text*/
+#seed {
+  font-size: 2vh;
+  opacity: 50%;
+}
+
+/*Styling for the codenames-grid-container*/
+#codenames-grid-container, #blue-codenames-grid-container, #red-codenames-grid-container {
+  display: flex;
+  min-height: calc(100vh - 2.5rem - 0.5rem - 16px);
+  padding: 1.25rem;
+  border-width: 0.25rem;
+  border-style: solid;
+}
+
+#red-codenames-grid-container {
+  border-color: red;
+}
+
+#blue-codenames-grid-container {
+  border-color: blue;
+}
+
+/*Styling for the codenames-grid*/
+#codenames-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 1.25rem 1.25rem;
+  flex-grow: 1;
+}
+
+/*Rounded corners for codename-card, card-texture, card-screen, and card-text-box*/
+.codename-card, .card-texture, .card-screen, .card-text-box, .card-text-box-top, .card-text-box-bottom {
+  border-radius: 12px;
+}
+
+/*Makes the card-screen and card-texture cover the area of the codename-card*/
+.card-screen, .card-texture {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/*Styling for the codename-card*/
+.codename-card {
+  display: flex;
+  position: relative;
+  background-color: #6c757d;
+}
+.codename-card .card-content-container {
+  display: flex;
+  flex-flow: column;
+  align-content: space-between;
+  row-gap: 0.5rem;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 0.5rem;
+}
+.codename-card .card-screen {
+  display: none;
+  background-color: black;
+  opacity: 50%;
+}
+.codename-card .card-texture {
+  opacity: 5%;
+  background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%) 8px 9px;
+  background-color: white;
+  background-size: 8px 8px;
+}
+
+/*Styling for the text box inside the codename cards*/
+.card-text-box, .card-text-box-top, .card-text-box-bottom {
+  display: grid;
+  align-items: center;
+  align-content: center;
+  height: 10px;
+  padding: 0.5rem;
+  background-color: white;
+  color: #121212;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.card-text-box-top {
+  display: none;
+  transform: scale(-1, -1);
+}
+
+/*Hover options for unrevealed cards */
+.unrevealed-card:hover .card-screen {
+  display: block;
+}
+
+/*Color and display options for revealed cards*/
+.revealed-card .card-screen {
+  display: block;
+  opacity: 70%;
+}
+
+.revealed-card.red .card-screen {
+  background-color: red;
+}
+
+.revealed-card.blue .card-screen {
+  background-color: blue;
+}
+
+.revealed-card.nuetral .card-screen {
+  background-color: silver;
+}
+
+.revealed-card.death .card-screen {
+  background-color: dark-gray;
+}
+
+/*Styling for the cross on revealed cards*/
+.crossed-card .card-cross {
+  position: absolute;
+  width: 100%;
+  align-self: center;
+  height: 1.25rem;
+  transform: rotate(30deg);
+  background-color: white;
+}
+
+/*Display for message that displays if your screen is not oriented or sized properly for the game*/
+#rotate-message {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  flex-flow: column;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+}
+
+/*Displays rotate message if screen is not rotated or sized properly*/
+@media (max-aspect-ratio: 3/2) {
+  #rotate-message {
+    display: flex;
+  }
+
+  #gameboard {
+    display: none;
+  }
+}
+/*Adds a second upside-down text box if the screen is big enough*/
+@media (min-width: 768px) {
+  .card-text-box-top {
+    display: grid;
+  }
+}
+
+/*# sourceMappingURL=gameboard.css.map */

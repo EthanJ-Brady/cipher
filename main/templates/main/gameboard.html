@@ -2,47 +2,72 @@
 
 {% block title %}Codenames Gameboard{% endblock %}
 
+{% block style %} 
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/gameboard.css' %}"> 
+{% endblock %}
+
 {% block content %}
-    {% if first_player == "red" %}
-    <div class="red-gameboard">
-    {% else %}
-    <div class="blue-gameboard">
-    {% endif %}
+    <div id="gameboard">
         <div id="header">
             <div id="back-button">
                 <a href="{% url 'index' %}">
-                    <button type="button" class="btn btn-primary">Generate New Board</button>
+                    <button type="button" class="btn btn-primary small-text">Generate New Board</button>
                 </a>
             </div>
             <h1 id="gameboad-title">Codenames</h1>
             <div id="options">
-                <a href="{% url 'gameboard' %}?seed={{ seed }}&deck={{ selected_deck }}&solution={{ viewing_solution|yesno:"false,true" }}">
+                <!--<a href="{% url 'gameboard' %}?seed={{ seed }}&deck={{ selected_deck }}&solution={{ viewing_solution|yesno:"false,true" }}">
                     {% if viewing_solution == True %}
-                        <button type="button" class="btn btn-light">View Gameboard</button>
+                        <button type="button" class="btn btn-light small-text">View Gameboard</button>
                     {% else %}
-                        <button type="button" class="btn btn-light">View Solution</button>
+                        <button type="button" class="btn btn-light small-text">View Solution</button>
                     {% endif %}
-                </a>
+                </a>-->
                 <div id="seed">Seed: {{ seed }}</div>
             </div>
         </div>
-        <div id="codenames-grid">
-            {% for card in cards %}
-                <div class="card text-center bg-secondary {{ click_option }} {{ card.type }}" onclick="clickCard(this);">
-                    <div class="card card-screen"></div>
-                    <h3 class ="card-text">{{ card.title }}</h3>
-                </div>
-            {% endfor %}
+        <div id="{{ first_player }}-codenames-grid-container">
+            <div id="codenames-grid" class="rounded-corners">
+                {% for card in cards %}
+                    <div class="codename-card {{ revealed_option }} {{ card.type }}" onclick="clickCard(this);">
+                        <div class="card-content-container">
+                            <div class="card-text-box-top">
+                                {% if card.title|length < 18 %}
+                                    <div class ="card-text small-text">{{ card.title }}</div> 
+                                {% else %}
+                                    <div class ="card-text micro-text">{{ card.title }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="card-text-box-bottom">
+                                {% if card.title|length < 18 %}
+                                    <div class ="card-text small-text">{{ card.title }}</div> 
+                                {% else %}
+                                    <div class ="card-text micro-text">{{ card.title }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-texture"></div>
+                        <div class="card-screen"></div>
+                        <div class="card-cross"></div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-        <script>
-            function clickCard(e) {
-                e.classList.add('clicked-card');
-                e.classList.remove('unclicked-card');
-            }
-        </script>
     </div>
     <div id="rotate-message">
         <h1>Codenames</h1>
         <div>Please Rotate Your Device</div>
+        <div class="small-text">(If your device is already rotated, you may need a wider screen)</div>
     </div>
+    <script>
+        function clickCard(e) {
+            {% if revealed_option == "unrevealed-card" %}
+                e.classList.add('revealed-card');
+                e.classList.remove('unrevealed-card');
+            {% else %}
+                e.classList.add('crossed-card');
+            {% endif %}
+        }
+    </script>
 {% endblock %}

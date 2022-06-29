@@ -1,23 +1,39 @@
 {% extends "main/page.html" %}
 
-{% block title %}Star Wars Codenames{% endblock %}
+{% block title %}Codenames Start Menu{% endblock %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/index.css' %}">
+{% endblock %}
 
 {% block content %}
-    <div id="title"><h1>Codenames</h1></div>
-    <div id="begin-menu">
-        <form method="GET" action="/codenames/gameboard/">
+    <div id="begin-menu-container">
+        <form id="begin-menu" class="rounded-corners" method="GET" action="/codenames/gameboard/">
+            <div id="title" class="large-text"><h1>Codenames</h1></div>
             <div class="form-group">
                 <h3>Select Card Deck</h3>
                 {% for deck in available_decks %}
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="deck" value="{{ deck.id }}">
+                        <input class="form-check-input" type="checkbox" name="deck" value="{{ deck.id }}">
                         <label class="form-check-label">{{ deck.deck_title }}</label>
                     </div>
                 {% endfor %}
             </div>
             <div class="form-group">
+                <h3>View Solution?</h3>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="solution" value="false" checked="checked">
+                    <label class="form-check-label">No</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="solution" value="true">
+                    <label class="form-check-label">Yes</label>
+                </div>
+            </div>
+            <div class="form-group">
                 <h3>Enter Seed<h3>
-                <input type="text" class="form-control form-control-lg" name="seed" value={{ seed }}>
+                <input type="text" class="form-control form-control-lg" name="seed" value={{ seed }} required>
             </div>
             <div class="form-group">
                 <button type="submit" class="form-control btn btn-primary btn-lg">Begin</button>

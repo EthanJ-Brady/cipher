@@ -1,3 +1,6 @@
+from ast import Return
+from email.policy import HTTP
+from select import select
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from main.models import CodenameCard, Deck
@@ -45,7 +48,7 @@ class ColoredCard:
         #Creates Cards with tiles from list_of_content and types from type_list
         cards = []
         for i in range(len(card_titles)):
-            cards.append(ColoredCard(card_titles[i], colors[i]))
+            cards.append(ColoredCard(str(card_titles[i]), colors[i]))
 
         #Returns list of cards
         return cards
@@ -68,10 +71,14 @@ def index(request):
 #Gameplay page for Codenames
 def gameboard(request):
     seed = request.GET.get("seed")
-    selected_deck = request.GET.get("deck")
+    selected_deck = request.GET.getlist("deck")
+    viewing_solution = request.GET.get("solution")
 
     #If seed or selected_deck is empty then return to index for selection
-    if seed is None or selected_deck is None:
+    if seed is None:
+        return index(request)
+
+    if selected_deck == []:
         return index(request)
 
     #Set the random module's seed to the generated seed
@@ -79,12 +86,10 @@ def gameboard(request):
 
     #If solution is true in the URL params then set mark all cards as clicked and viewing_solution to true. 
     #Otherwise, mark cards as unclicked and viewing_solution to false
-    if request.GET.get("solution") == "true":
-        click_option = "clicked-card"
-        viewing_solution = True
+    if viewing_solution == "true":
+        revealed_option = "revealed-card"
     else:
-        click_option = "unclicked-card"
-        viewing_solution = False
+        revealed_option = "unrevealed-card"
     
 
     #Determine first player and determines card amounts
@@ -97,8 +102,17 @@ def gameboard(request):
         red_cnt = 8
         blue_cnt = 9
 
-    #Generate 25 randomly shuffled colored cards from the selected card titles
-    card_titles = random.sample(list(CodenameCard.objects.all().filter(deck=selected_deck)), 25)
+    #Filter all available cards down to the cards from the selected deck
+    available_card_titles = CodenameCard.objects.all()
+    card_titles = []
+    for card in available_card_titles:
+        if str(card.deck.id) in selected_deck:
+            card_titles.append(card.card_title)
+
+    #Select 25 random cards from the selected decks
+    card_titles = random.sample(card_titles, 25)
+
+    #Create shuffled colored cards from the 25 selected cards
     cards = ColoredCard.generate_colored_cards(card_titles, red_cnt=red_cnt, blue_cnt=blue_cnt, nuetral_cnt=7, death_cnt=1)
     random.shuffle(cards)
 
@@ -106,8 +120,7 @@ def gameboard(request):
         "seed" : seed,
         "cards" : cards,
         "selected_deck" : selected_deck,
-        "click_option" : click_option,
-        "viewing_solution" : viewing_solution,
+        "revealed_option" : revealed_option,
         "first_player" : first_player
     }
     return render(request, 'main/gameboard.html', context)

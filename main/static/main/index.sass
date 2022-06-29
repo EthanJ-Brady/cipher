@@ -1,0 +1,31 @@
+@use "style.sass"
+    
+$default-spacing: 1.25rem
+$card-radius: 1.25rem
+$card-color: #6c757d
+$menu-item-background-color: #6c757d
+
+#begin-menu-container
+    display: flex
+    justify-content: center
+
+#begin-menu
+    display: flex
+    justify-content: space-around
+    row-gap: $default-spacing
+    flex-direction: column
+
+    min-height: 100vh
+
+    text-align: center
+
+#begin-menu > *
+    @extend .shadow
+    background-color: $card-color
+    border-radius: $card-radius
+    padding: $default-spacing
+
+.form-group
+    display: flex
+    flex-direction: column
+    align-items: center
