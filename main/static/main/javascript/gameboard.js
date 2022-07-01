@@ -15,7 +15,43 @@ document.addEventListener('DOMContentLoaded', function() {
     codenameCards.forEach(function(card) {
         card.onclick = function() { revealCard(card); }
     })
+
+    //Get the url parameters for deck and seed
+    const querystring = window.location.search;
+    const urlParams = new URLSearchParams(querystring);
+    let decks = urlParams.getAll('deck');
+    let seed = urlParams.get('seed');
+
+    setCardTexts(decks, seed)
+
 })
+
+//Replaces all the card text boxes with new card titles generated from the given decks and seed parameters
+function setCardTexts(decks, seed) {
+    //Create a url parameter string with each deck form the current url parameters
+    deckParamString = ""
+    decks.forEach(deck => {
+        deckParamString += `deck=${deck}&`
+    })
+
+    //Initializes the card number counter (which will be used to select the next card in the sequence) to 0
+    let cardNumCounter = 0;
+
+    //Replace all card text boxes with a new set of card titles using the selected parameters
+    fetch(`/codenames/getcardtitles/?${deckParamString}seed=${seed}&limit=25`)
+    .then(response => response.json())
+    .then(jsonCards => {
+        //After the selected cards titles have loaded, set the innerHTML of the card's text boxes to contain the card titles
+        document.querySelectorAll('.codename-card').forEach(codenameCard => {
+            codenameCard.querySelectorAll('.card-text').forEach(cardText => {
+                console.log("Written");
+                cardText.innerHTML = jsonCards.cards[cardNumCounter];
+            })
+            cardNumCounter++;
+        })
+        console.log(jsonCards)
+    })
+}
 
 //Covers the inputed in a screen colored based on the cards datatype
 function revealCard(e) {

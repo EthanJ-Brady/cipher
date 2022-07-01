@@ -1,8 +1,9 @@
 from ast import Return
 from email.policy import HTTP
+from http.client import HTTPResponse
 from select import select
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from main.models import CodenameCard, Deck
 import random
 
@@ -52,7 +53,6 @@ class ColoredCard:
 
         #Returns list of cards
         return cards
-
 
 #Index Route
 def index(request):
@@ -110,7 +110,37 @@ def gameboard(request):
     context = {
         "seed" : seed,
         "cards" : cards,
-        "selected_deck" : selected_deck,
         "first_player" : first_player
     }
     return render(request, 'main/gameboard.html', context)
+
+#JsonResponse page for card_titles
+def get_card_titles(request):
+    seed = request.GET.get("seed")
+    selected_decks = request.GET.getlist("deck")
+    limit = request.GET.get("limit")
+
+    if seed is None:
+        random.seed(random.randint(0,999999999))
+    else:
+        random.seed(seed)
+
+    if selected_decks == []:
+        return JsonResponse({"cards:": []})
+
+    selected_card_titles = []
+    available_card_titles = CodenameCard.objects.all()
+    for card in available_card_titles:
+        if str(card.deck.id) in selected_decks:
+            selected_card_titles.append(card.card_title)
+
+    if limit is None:
+        random.shuffle(selected_card_titles)
+        return JsonResponse({"cards": selected_card_titles})
+    elif len(selected_card_titles) < int(limit):
+        random.shuffle(selected_card_titles)
+        return JsonResponse({"cards": selected_card_titles})
+    else:
+        selected_card_titles = random.sample(selected_card_titles, int(limit))
+        return JsonResponse({"cards": selected_card_titles})
+    
