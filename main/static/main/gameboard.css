@@ -110,6 +110,15 @@ body {
   background-color: white;
   background-size: 8px 8px;
 }
+.codename-card .card-cross {
+  display: none;
+  position: absolute;
+  width: 100%;
+  align-self: center;
+  height: 1.25rem;
+  transform: rotate(30deg);
+  background-color: white;
+}
 
 /*Styling for the text box inside the codename cards*/
 .card-text-box, .card-text-box-top, .card-text-box-bottom {
@@ -129,41 +138,9 @@ body {
   transform: scale(-1, -1);
 }
 
-/*Hover options for unrevealed cards */
-.unrevealed-card:hover .card-screen {
+/*Hover styling for cards */
+.codename-card:hover .card-screen {
   display: block;
-}
-
-/*Color and display options for revealed cards*/
-.revealed-card .card-screen {
-  display: block;
-  opacity: 70%;
-}
-
-.revealed-card.red .card-screen {
-  background-color: red;
-}
-
-.revealed-card.blue .card-screen {
-  background-color: blue;
-}
-
-.revealed-card.nuetral .card-screen {
-  background-color: silver;
-}
-
-.revealed-card.death .card-screen {
-  background-color: dark-gray;
-}
-
-/*Styling for the cross on revealed cards*/
-.crossed-card .card-cross {
-  position: absolute;
-  width: 100%;
-  align-self: center;
-  height: 1.25rem;
-  transform: rotate(30deg);
-  background-color: white;
 }
 
 /*Display for message that displays if your screen is not oriented or sized properly for the game*/

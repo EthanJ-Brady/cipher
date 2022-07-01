@@ -2,9 +2,10 @@
 
 {% block title %}Codenames Gameboard{% endblock %}
 
-{% block style %} 
+{% block head %} 
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'main/gameboard.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'main/gameboard.css' %}">
+    <script src="{% static "main/javascript/gameboard.js" %}" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
@@ -17,20 +18,14 @@
             </div>
             <h1 id="gameboad-title">Codenames</h1>
             <div id="options">
-                <!--<a href="{% url 'gameboard' %}?seed={{ seed }}&deck={{ selected_deck }}&solution={{ viewing_solution|yesno:"false,true" }}">
-                    {% if viewing_solution == True %}
-                        <button type="button" class="btn btn-light small-text">View Gameboard</button>
-                    {% else %}
-                        <button type="button" class="btn btn-light small-text">View Solution</button>
-                    {% endif %}
-                </a>-->
+                <button type="button" id="solution-button" class="btn btn-light small-text">View Solution</button>
                 <div id="seed">Seed: {{ seed }}</div>
             </div>
         </div>
         <div id="{{ first_player }}-codenames-grid-container">
             <div id="codenames-grid" class="rounded-corners">
                 {% for card in cards %}
-                    <div class="codename-card {{ revealed_option }} {{ card.type }}" onclick="clickCard(this);">
+                    <div class="codename-card" data-color="{{ card.type }}" >
                         <div class="card-content-container">
                             <div class="card-text-box-top">
                                 {% if card.title|length < 18 %}
@@ -60,14 +55,4 @@
         <div>Please Rotate Your Device</div>
         <div class="small-text">(If your device is already rotated, you may need a wider screen)</div>
     </div>
-    <script>
-        function clickCard(e) {
-            {% if revealed_option == "unrevealed-card" %}
-                e.classList.add('revealed-card');
-                e.classList.remove('unrevealed-card');
-            {% else %}
-                e.classList.add('crossed-card');
-            {% endif %}
-        }
-    </script>
 {% endblock %}
