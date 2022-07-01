@@ -98,14 +98,10 @@ def gameboard(request):
     #Determine first player and determines card amounts
     if random.randint(0, 1):
         first_player = "red"
-        red_cnt = 9
-        blue_cnt = 8
+        colors = generate_card_colors(red=9, blue=8, gray=7, black=1)
     else:
         first_player = "blue"
-        red_cnt = 8
-        blue_cnt = 9
-
-    colors = generate_card_colors(red=red_cnt, blue=blue_cnt, gray=7, black=1)
+        colors = generate_card_colors(red=8, blue=9, gray=7, black=1)
 
     context = {
         "seed" : seed,
