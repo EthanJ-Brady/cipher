@@ -7,9 +7,6 @@ from django.http import HttpResponse, JsonResponse
 from main.models import CodenameCard, Deck
 import random
 
-#The number of cards on the gameboard is 25
-numCards = 25
-
 #Retrives entries from the CodenameCard model
 all_codename_cards = CodenameCard.objects.all()
 
@@ -17,42 +14,6 @@ all_codename_cards = CodenameCard.objects.all()
 available_decks = set()
 for card in all_codename_cards:
     available_decks.add(card.deck)
-
-#Class which contains a title of card and a type of card which includes a red, blue, nuetral, or death card
-class ColoredCard:
-    def __init__(self, title, type):
-        self.title = title
-        if type in ["red", "blue", "gray", "black"]:
-            self.type = type
-    
-    def __str__(self):
-        return f"{self.title}, {self.type}"
-
-    #Returns a list of cards with titles in list_of_content with types defined by the parameters
-    @staticmethod
-    def generate_colored_cards(card_titles, red_cnt, blue_cnt, nuetral_cnt, death_cnt):
-        
-        #Creates a list of card colors
-        colors = []
-        for i in range(red_cnt):
-            colors.append("red")
-        for i in range(blue_cnt):
-            colors.append("blue")
-        for i in range(nuetral_cnt):
-            colors.append("gray")
-        for i in range(death_cnt):
-            colors.append("black")
-
-        #Shuffles the list of card colors
-        random.shuffle(colors)
-
-        #Creates Cards with tiles from list_of_content and types from type_list
-        cards = []
-        for i in range(len(card_titles)):
-            cards.append(ColoredCard(str(card_titles[i]), colors[i]))
-
-        #Returns list of cards
-        return cards
 
 def generate_card_colors(red=0, blue=0, gray=0, black=0):
 
