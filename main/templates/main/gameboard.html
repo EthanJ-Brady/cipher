@@ -24,8 +24,8 @@
         </div>
         <div id="{{ first_player }}-codenames-grid-container">
             <div id="codenames-grid" class="rounded-corners">
-                {% for card in cards %}
-                    <div class="codename-card" data-color="{{ card.type }}" >
+                {% for color in colors %}
+                    <div class="codename-card" data-color="{{ color }}" >
                         <div class="card-content-container">
                             <div class="card-text-box-top">
                                 {% if card.title|length < 18 %}

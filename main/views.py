@@ -54,6 +54,22 @@ class ColoredCard:
         #Returns list of cards
         return cards
 
+def generate_card_colors(red=0, blue=0, gray=0, black=0):
+
+    #Creates a list of card colors
+    colors = []
+    for i in range(red):
+        colors.append("red")
+    for i in range(blue):
+        colors.append("blue")
+    for i in range(gray):
+        colors.append("gray")
+    for i in range(black):
+        colors.append("black")
+
+    random.shuffle(colors)
+    return colors
+
 #Index Route
 def index(request):
     #If there is no seed specified in the URL then generate a random one each time the page loads
@@ -71,13 +87,9 @@ def index(request):
 #Gameplay page for Codenames
 def gameboard(request):
     seed = request.GET.get("seed")
-    selected_deck = request.GET.getlist("deck")
 
     #If seed or selected_deck is empty then return to index for selection
     if seed is None:
-        return index(request)
-
-    if selected_deck == []:
         return index(request)
 
     #Set the random module's seed to the generated seed
@@ -93,23 +105,11 @@ def gameboard(request):
         red_cnt = 8
         blue_cnt = 9
 
-    #Filter all available cards down to the cards from the selected deck
-    available_card_titles = CodenameCard.objects.all()
-    card_titles = []
-    for card in available_card_titles:
-        if str(card.deck.id) in selected_deck:
-            card_titles.append(card.card_title)
-
-    #Select 25 random cards from the selected decks
-    card_titles = random.sample(card_titles, 25)
-
-    #Create shuffled colored cards from the 25 selected cards
-    cards = ColoredCard.generate_colored_cards(card_titles, red_cnt=red_cnt, blue_cnt=blue_cnt, nuetral_cnt=7, death_cnt=1)
-    random.shuffle(cards)
+    colors = generate_card_colors(red=red_cnt, blue=blue_cnt, gray=7, black=1)
 
     context = {
         "seed" : seed,
-        "cards" : cards,
+        "colors" : colors,
         "first_player" : first_player
     }
     return render(request, 'main/gameboard.html', context)
