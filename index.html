@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="slider.css"></link>
+    <title>Codenames</title>
+    <script src="seedrandom.js" defer></script>
+    <script src="decks.js" defer></script>
+    <script src="menu.js" defer></script>
+    <script src="game.js" defer></script>
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <header id="header">
+        <div id="menu-button" class="material-symbols-outlined">menu</div>
+        <h1>Codenames</h1>
+    </header>
+    <main id="gameboard" class="gameboard"></main> 
+    <nav id="menu" class="menu">
+        <div class="menu__header">
+            <h2 class="menu__title">Deck Menu</h2>
+            <div class="menu__close material-symbols-outlined">close</div>
+        </div>
+        <form id="settings">
+            <fieldset>
+                <h3>Seed</h3>
+                <input id="seed" type="text" name="seed" value=""></input>
+            </fieldset>
+            <fieldset>
+                <h3>Gameboard Size</h3>
+                <input id="gameboard-size" type="text" name="size" value="4"></input>
+            </fieldset>
+            <fieldset>            
+                <h3>Teams</h3>
+                <input type="radio" name="teamCount" value="2" checked>2</input>
+                <input type="radio" name="teamCount" value="3">3</input>
+                <input type="radio" name="teamCount" value="4">4</input>
+            </fieldset>
+            <fieldset>
+                <h3>Deck Name</h3>
+                <select name="deckName">
+                    <option value="testnumbers">Test Numbers</option>
+                    <option value="testnumbers2">Test Numbers 2</option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <h3>View Solution</h3>
+                <label id="view-solution" class="switch">
+                    <input type="checkbox" name="viewSolution">
+                    <span class="slider round"></span>
+                </label>
+            </fieldset>
+            <br>
+            <fieldset>
+                <h3>Team Colors</h3>
+                <input type="color" name="team1Color" value="#DC143C">
+                <input type="color" name="team2Color" value="#6495FD">
+                <input type="color" name="team3Color" value="#3CB371">
+                <input type="color" name="team4Color" value="#FFD700">
+            </fieldset>
+            <fieldset>
+                <h3>Game Colors</h3>
+                Nuetral
+                <input type="color" name="neutralColor" value="#D2B48C">
+                Game Over
+                <input type="color" name="deathColor" value="#202020">
+            </fieldset>
+            <fieldset>
+                <h3>Bidirectional Cards</h3>
+                <label id="bidirectional-cards-switch" class="switch">
+                    <input type="checkbox" name="viewBidirectional">
+                    <span class="slider round"></span>
+                </label>
+            </fieldset>
+        </form>
+    </nav>
+</body>
+</html>
