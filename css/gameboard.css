@@ -1,0 +1,85 @@
+.card {
+    align-items: stretch;
+    background-color: var(--light-primary-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
+    padding: 6px;
+    position: relative;
+}
+
+.card__cross {
+    align-self: center;
+    justify-self: center;
+    background-color: white;
+    height: 24px; 
+    position: absolute;
+    top: calc(50% - 12px);
+    width: 200%;
+    transform: rotate(-30deg);
+}
+
+.card--interactable {
+    cursor: pointer;
+}
+
+.card__screen {
+    opacity: .75;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.card--unrevealed:hover .card__screen {
+    background-color: rgb(128,128,128);
+}
+
+.card__texture {
+    background-color: #e5e5f7;
+    opacity: 0.4;
+    position: absolute;
+    background-color: #e5e5f7;
+    background-image: radial-gradient(var(--light-primary-color) 0.5px, transparent 0.5px), radial-gradient(var(--light-primary-color) 0.5px, #e5e5f7 0.5px);
+    background-size: 10px 10px;
+    background-position: 0 0,5px 5px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.card__title {
+    align-items: center;
+    background-color: white;
+    border-radius: 12px;
+    color: black;
+    display: flex;
+    flex-grow: 1;
+    font-size: 1.5rem;
+    font-weight: bold;
+    justify-content: center;
+    text-align: center;
+}
+
+.card__title--flipped {
+    transform: scale(-1, -1);    
+}
+
+.gameboard {
+    border: 4px solid white;
+    display: grid;
+    grid-gap: 12px;
+    padding: 12px;
+}
+
+.gameboard .card__title--flipped {
+    display: none;
+}
+
+.gameboard.gameboard--bidirectional .card__title--flipped {
+    display: flex;
+}

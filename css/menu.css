@@ -1,0 +1,50 @@
+#settings {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column; 
+    gap: 1rem;
+}
+
+.menu {
+    align-items: stretch;
+    background-color: var(--light-primary-color);
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    padding: 0 1rem 1rem 1rem;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    right: 100vw;
+    bottom: 0;
+    left: -33vw;
+    transition: left 0.5s, right 0.5s;
+}
+
+.menu--shown {
+    left: 0vw;
+    right: 67vw
+}
+
+.menu__close {
+    cursor: pointer;
+    font-size: 48px;
+    text-align: end;
+    top: 1rem;
+}
+
+.menu__header {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    position: sticky;
+    text-align: left;
+}
+
+.menu__mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 67vw;
+}

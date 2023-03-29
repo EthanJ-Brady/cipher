@@ -1,0 +1,74 @@
+:root {
+    --dark-primary-color: rgb(20, 20, 20);
+    --light-primary-color: #666666;
+    --lighter-primary-color: #999999;
+    --text-color: white;
+    --accent-color: #2196F3;
+}
+
+body {
+    background-color: var(--dark-primary-color);
+    color: var(--text-color);
+    display: grid;
+    font-family: Arial, Helvetica, sans-serif;
+    grid-template-rows: auto 1fr;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+fieldset {
+    border: 0px;
+    border-radius: 18px;
+    background-color: var(--lighter-primary-color);
+}
+
+fieldset h3 {
+    margin: 5px
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+input[type="color" i] {
+    border-radius: 3px;
+}
+
+input[type="text" i] {
+    border: 0px;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+#header {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+        "menu-button title empty";
+    margin: 0 2rem;
+    justify-content: center;
+    justify-items: center;
+}
+
+#header #menu-button{
+    justify-self: left;
+}
+
+#menu-button {
+    cursor: pointer;
+    font-size: 48px;
+}
+

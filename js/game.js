@@ -15,52 +15,63 @@ function shuffle(seed, list) {
     return list; 
 }
 
+function combineDecks(list) {
+    combinedDeck = []
+    for (const deckName of list) {
+        combinedDeck.push(...decks[deckName]);
+    }
+    return combinedDeck;
+}
+
 class Card {
     constructor(title, color) {
         this.color = color;
         this.cardElement = new CardElement(title);
-        this.unreveal();
     }
 
-    colorCard() {
-        this.cardElement.screen.style.backgroundColor = this.color;
+    colorCard(bool) {
+        if (bool) {this.cardElement.screen.style.backgroundColor = this.color;}
+        else {this.cardElement.screen.style.backgroundColor = null;}
     }
 
-    uncolorCard() {
-        this.cardElement.screen.style.backgroundColor = null;
-    }
-
-    crossCard() {
-        this.cross = stringToHtml('<div class="card__cross"></div>');
-        this.cardElement.element.appendChild(this.cross);
-        this.cardElement.element.onclick = () => {
-            this.uncrossCard();
-            this.cardElement.element.onclick = () => this.crossCard();
+    crossCard(bool) {
+        if (bool) {
+            this.cross = stringToHtml('<div class="card__cross"></div>');
+            this.cardElement.element.appendChild(this.cross);
+            this.cardElement.element.onclick = () => {
+                this.crossCard(false);
+                this.cardElement.element.onclick = () => this.crossCard(true);
+            }
+        }
+        else {
+            if (this.cross) {this.cross.remove();}
         }
     }
 
-    uncrossCard() {
-        this.cross.remove();
+    reveal(bool) {
+        if (bool) {
+            this.colorCard(true);
+            this.cardElement.element.classList.remove("card--unrevealed");
+            this.cardElement.element.classList.remove("card--interactable");
+        }
+        else {
+            this.colorCard(false);
+            this.crossCard(false);
+            this.cardElement.element.classList.add("card--unrevealed");
+            this.cardElement.element.classList.add("card--interactable");
+            this.cardElement.element.onclick = () => this.reveal(true);
+        }
     }
 
-    unreveal() {
-        this.uncolorCard();
-        if (this.cross) {this.uncrossCard();}
-        this.cardElement.element.classList.add("card--unrevealed");
-        this.cardElement.element.classList.add("card--interactable");
-        this.cardElement.element.onclick = () => this.reveal();
-    }
-    
-    reveal() {
-        this.colorCard();
-        this.cardElement.element.classList.remove("card--unrevealed");
-        this.cardElement.element.classList.remove("card--interactable");
-    }
-
-    viewSolution() {
-        this.colorCard();
-        this.cardElement.element.classList.add("card--interactable");
-        this.cardElement.element.onclick = () => this.crossCard()
+    viewSolution(bool) {
+        if (bool) {
+            this.colorCard(true);
+            this.cardElement.element.classList.add("card--interactable");
+            this.cardElement.element.onclick = () => this.crossCard(true)
+        }
+        else {
+            this.reveal(false);
+        }
     }
 }
 
@@ -82,7 +93,7 @@ class CardElement {
 class Gameboard {
     constructor(settings) {
         const size = settings.size.value;
-        const deckName = settings.deckName.value;
+        const selectedDecks = settings.selectedDecks.selectedOptions;
         const seed = settings.seed.value;
         const viewSolution = settings.viewSolution.checked;
         const viewBidirectional = settings.viewBidirectional.checked;
@@ -97,14 +108,22 @@ class Gameboard {
             "death": settings.deathColor.value
         }
 
+        let selectedDeckValues = []
+        for (const selectedDeck of selectedDecks) {
+            selectedDeckValues.push(selectedDeck.value)
+        }
+
+        const combinedDeck = combineDecks(selectedDeckValues);
+
         this.element = document.getElementById("gameboard");
         this.deck = new Deck(
             size,
-            shuffle(seed, decks[deckName]),
+            shuffle(seed, combinedDeck),
             Gameboard.createSolution(seed, size, teamCount, colorDict)
         );
         this.deck.viewSolution(viewSolution);
         this.viewBidirectional(viewBidirectional);
+        this.setBorderColor(Gameboard.generateStartingColor(seed, teamCount, colorDict));
         this.displayElement();
     }
 
@@ -131,6 +150,19 @@ class Gameboard {
         return shuffledColors;
     }
 
+    static generateStartingColor(seed, teamCount, colorDict) {
+        let colorList = [];
+        if (teamCount >= 1) {colorList.push(colorDict["team1"]);}
+        if (teamCount >= 2) {colorList.push(colorDict["team2"]);}
+        if (teamCount >= 3) {colorList.push(colorDict["team3"]);}
+        if (teamCount >= 4) {colorList.push(colorDict["team4"]);}
+        return shuffle(seed, colorList)[0];
+    }
+
+    setBorderColor(color) {
+        this.element.style.borderColor = color;
+    }
+
     viewBidirectional(bool) {
         if (bool) {this.element.classList.add("gameboard--bidirectional");}
         else {this.element.classList.remove("gameboard--bidirectional");}
@@ -139,6 +171,7 @@ class Gameboard {
     displayElement() {
         this.element.innerHTML = "";
         this.element.style.gridTemplateColumns = `repeat(${this.deck.size}, 1fr)`;
+        this.element.style.gridTemplateRows = `repeat(${this.deck.size}, 1fr)`;
         for (const card of this.deck.cards) {
             this.element.appendChild(card.cardElement.element);
         }
@@ -154,6 +187,9 @@ class Deck {
 
     static constructCards(size, titles, solutions) {
         const cards = [];
+        for (let i = titles.length; i < size * size; i++) {
+            titles.push("");
+        }
         for (let i = 0; i < size * size; i++) {
             cards.push(new Card(titles[i], solutions[i]));
         }
@@ -163,12 +199,12 @@ class Deck {
     viewSolution(bool) {
         if (bool) {
             for (const card of this.cards) {
-                card.viewSolution();
+                card.viewSolution(true);
             }
         }
         else {
             for (const card of this.cards) {
-                card.unreveal();
+                card.viewSolution(false);
             }
         }
     }
