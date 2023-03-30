@@ -29,6 +29,7 @@
 .menu__close {
     cursor: pointer;
     font-size: 48px;
+    grid-area: "title";
     text-align: end;
     top: 1rem;
 }
@@ -37,8 +38,16 @@
     align-items: center;
     display: grid;
     grid-template-columns: 1fr auto;
+    grid-template-areas: 
+        "title" "close"
+        "version" "none";
+    margin: 1rem 0;
     position: sticky;
     text-align: left;
+}
+
+.menu__header > * {
+    margin: 0;
 }
 
 .menu__mask {
@@ -47,4 +56,8 @@
     right: 0;
     bottom: 0;
     width: 67vw;
+}
+
+.menu__version {
+    opacity: 50%;
 }
