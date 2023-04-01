@@ -299,7 +299,7 @@ decks = {
         "Silver Surfer",
         "Kang the Conqueror" 
     ],
-    "Book of Mormon": [
+    "Book-of-Mormon": [
         "Nephi",
         "Lehi",
         "Laman",
