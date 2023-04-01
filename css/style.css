@@ -52,6 +52,19 @@ input[type="text" i] {
     padding: 4px;
 }
 
+select {
+    border: 0px;
+    border-radius: 8px;
+    padding: 4px;
+    width: 100%;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+select::-webkit-scrollbar {
+    display: none;
+}
+
 #header {
     align-items: center;
     display: grid;
