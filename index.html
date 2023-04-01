@@ -26,7 +26,7 @@
         <div class="menu__header">
             <h2 class="menu__title">Deck Menu</h2>
             <div class="menu__close material-symbols-outlined">close</div>
-            <div class="menu__version">v2.0.4</div>
+            <div class="menu__version">v2.0.5</div>
         </div>
         <form id="settings">
             <fieldset>
@@ -39,9 +39,9 @@
             </fieldset>
             <fieldset>            
                 <h3>Teams</h3>
-                <input type="radio" name="teamCount" value="2" checked>2</input>
-                <input type="radio" name="teamCount" value="3">3</input>
-                <input type="radio" name="teamCount" value="4">4</input>
+                    <div><input type="radio" name="teamCount" value="2" checked>2</div>
+                    <div><input type="radio" name="teamCount" value="3">3</div>
+                    <div><input type="radio" name="teamCount" value="4">4</div>
             </fieldset>
             <fieldset>
                 <h3>Decks</h3>
@@ -50,17 +50,21 @@
             </fieldset>
             <fieldset>
                 <h3>Team Colors</h3>
-                <input type="color" name="team1Color" value="#DC143C">
-                <input type="color" name="team2Color" value="#6495FD">
-                <input type="color" name="team3Color" value="#3CB371">
-                <input type="color" name="team4Color" value="#FFD700">
+                <div class="grid">
+                    <input type="color" name="team1Color" value="#DC143C">
+                    <input type="color" name="team2Color" value="#6495FD">
+                    <input type="color" name="team3Color" value="#3CB371">
+                    <input type="color" name="team4Color" value="#FFD700">
+                </div>
             </fieldset>
             <fieldset>
                 <h3>Game Colors</h3>
-                Nuetral
-                <input type="color" name="neutralColor" value="#D2B48C">
-                Game Over
-                <input type="color" name="deathColor" value="#202020">
+                <div class="grid">
+                    Nuetral
+                    <input type="color" name="neutralColor" value="#D2B48C">
+                    Game Over
+                    <input type="color" name="deathColor" value="#202020">
+                </div>
             </fieldset>
             <fieldset>
                 <h3>Solution</h3>

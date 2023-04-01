@@ -1,3 +1,9 @@
+fieldset {
+    border: 0px;
+    border-radius: 16px;
+    background-color: var(--lighter-primary-color);
+}
+
 #settings {
     align-items: stretch;
     display: grid;
@@ -6,11 +12,15 @@
     grid-gap: 1rem;
 }
 
+.grid {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+}
+
 .menu {
-    align-items: stretch;
     background-color: var(--light-primary-color);
-    display: flex;
-    flex-direction: column;
     overflow-y: scroll;
     padding: 0 1rem 1rem 1rem;
     position: fixed;
@@ -31,8 +41,6 @@
     cursor: pointer;
     font-size: 48px;
     grid-area: "title";
-    text-align: end;
-    top: 1rem;
 }
 
 .menu__header {
@@ -43,7 +51,6 @@
         "title" "close"
         "version" "none";
     margin: 1rem 0;
-    position: sticky;
     text-align: left;
 }
 
