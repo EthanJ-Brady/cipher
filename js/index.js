@@ -12,7 +12,9 @@ for (deck in decks) {
 }
 
 let gameboard = new Gameboard(settings);
-settings.onchange = () => gameboard = new Gameboard(settings);
+settings.onchange = () => {
+    gameboard = new Gameboard(settings);
+}
 
 function stringToHtml(str) {
     const e = document.createElement("div");

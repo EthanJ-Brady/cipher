@@ -26,27 +26,45 @@
         <div class="menu__header">
             <h2 class="menu__title">Deck Menu</h2>
             <div class="menu__close material-symbols-outlined">close</div>
-            <div class="menu__version">v2.0.5</div>
+            <div class="menu__version">v2.0.7</div>
         </div>
         <form id="settings">
             <fieldset>
                 <h3>Seed</h3>
                 <input type="text" name="seed" value=""></input>
+                <div class="required">*</div>
             </fieldset>
             <fieldset>
                 <h3>Size</h3>
                 <input type="text" name="size" value="5"></input>
+                <div class="required">*</div>
             </fieldset>
             <fieldset>            
                 <h3>Teams</h3>
-                    <div><input type="radio" name="teamCount" value="2" checked>2</div>
-                    <div><input type="radio" name="teamCount" value="3">3</div>
-                    <div><input type="radio" name="teamCount" value="4">4</div>
+                <div><input type="radio" name="teamCount" value="2" checked>2</div>
+                <div><input type="radio" name="teamCount" value="3">3</div>
+                <div><input type="radio" name="teamCount" value="4">4</div>
+                <div class="required">*</div>
             </fieldset>
             <fieldset>
                 <h3>Decks</h3>
-                <select name="selectedDecks" multiple>
-                </select>
+                <select name="selectedDecks" multiple></select>
+                <div class="required">*</div>
+            </fieldset>
+            <fieldset>
+                <h3>Solution</h3>
+                <label class="switch">
+                    <input type="checkbox" name="viewSolution">
+                    <span class="slider round"></span>
+                </label>
+                <div class="required">*</div>
+            </fieldset>
+            <fieldset>
+                <h3>Bidirectional</h3>
+                <label class="switch">
+                    <input type="checkbox" name="viewBidirectional">
+                    <span class="slider round"></span>
+                </label>
             </fieldset>
             <fieldset>
                 <h3>Team Colors</h3>
@@ -67,16 +85,9 @@
                 </div>
             </fieldset>
             <fieldset>
-                <h3>Solution</h3>
+                <h3>Show Titles</h3>
                 <label class="switch">
-                    <input type="checkbox" name="viewSolution">
-                    <span class="slider round"></span>
-                </label>
-            </fieldset>
-            <fieldset>
-                <h3>Bidirectional</h3>
-                <label class="switch">
-                    <input type="checkbox" name="viewBidirectional">
+                    <input type="checkbox" name="showTitles" checked> 
                     <span class="slider round"></span>
                 </label>
             </fieldset>

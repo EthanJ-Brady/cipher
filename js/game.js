@@ -108,12 +108,17 @@ class Gameboard {
             "death": settings.deathColor.value
         }
 
-        let selectedDeckValues = []
-        for (const selectedDeck of selectedDecks) {
-            selectedDeckValues.push(selectedDeck.value)
+        let combinedDeck = [];
+        if (settings.showTitles.checked) {
+            let selectedDeckValues = []
+            for (const selectedDeck of selectedDecks) {
+                selectedDeckValues.push(selectedDeck.value)
+            }
+            combinedDeck = combineDecks(selectedDeckValues);
         }
-
-        const combinedDeck = combineDecks(selectedDeckValues);
+        else {
+            combinedDeck = [];
+        }
 
         this.element = document.getElementById("gameboard");
         this.deck = new Deck(
