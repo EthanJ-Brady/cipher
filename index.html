@@ -5,69 +5,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="css/root.css"></link>
     <link rel="stylesheet" href="css/style.css"></link>
     <link rel="stylesheet" href="css/slider.css"></link>
     <link rel="stylesheet" href="css/gameboard.css"></link>
     <link rel="stylesheet" href="css/menu.css"></link>
+    <link rel="stylesheet" href="css/settings.css"></link>
+    <link rel="stylesheet" href="css/inputs.css"></link>
+    <link rel="stylesheet" href="css/header.css"></link>
+    <link rel="stylesheet" href="css/card.css"></link>
     <script src="js/seedrandom.js" defer></script>
     <script src="js/decks.js" defer></script>
     <script src="js/menu.js" defer></script>
     <script src="js/game.js" defer></script>
     <script src="js/index.js" defer></script>
+    <script src="js/card.js" defer></script>
     <title>Codenames</title>
 </head>
 <body>
-    <header id="header">
-        <div id="menu-button" class="material-symbols-outlined">menu</div>
-        <h1>Cipher</h1>
+    <header class="header" id="header">
+        <div id="menu-button" class="menu-button material-symbols-outlined">menu</div>
+        <h1 class="title">Cipher</h1>
     </header>
     <main id="gameboard" class="gameboard"></main> 
     <nav id="menu" class="menu">
         <div class="menu__header">
             <h2 class="menu__title">Deck Menu</h2>
             <div class="menu__close material-symbols-outlined">close</div>
-            <div class="menu__version">v2.0.7</div>
+            <div class="menu__version">v2.0.8</div>
         </div>
-        <form id="settings">
-            <fieldset>
-                <h3>Seed</h3>
+        <form class="settings" id="settings">
+            <fieldset class="game-option game-option--required">
+                <div class="game-option__title">Seed</div>
                 <input type="text" name="seed" value=""></input>
-                <div class="required">*</div>
             </fieldset>
-            <fieldset>
-                <h3>Size</h3>
+            <fieldset class="game-option game-option--required">
+                <div class="game-option__title">Size</div>
                 <input type="text" name="size" value="5"></input>
-                <div class="required">*</div>
             </fieldset>
-            <fieldset>            
-                <h3>Teams</h3>
+            <fieldset class="game-option game-option--required">            
+                <div class="game-option__title">Teams</div>
                 <div><input type="radio" name="teamCount" value="2" checked>2</div>
                 <div><input type="radio" name="teamCount" value="3">3</div>
                 <div><input type="radio" name="teamCount" value="4">4</div>
-                <div class="required">*</div>
             </fieldset>
-            <fieldset>
-                <h3>Decks</h3>
+            <fieldset class="game-option game-option--required">
+                <div class="game-option__title">Decks</div>
                 <select name="selectedDecks" multiple></select>
-                <div class="required">*</div>
             </fieldset>
-            <fieldset>
-                <h3>Solution</h3>
+            <fieldset class="game-option game-option--required">
+                <div class="game-option__title">Solution</div>
                 <label class="switch">
                     <input type="checkbox" name="viewSolution">
                     <span class="slider round"></span>
                 </label>
-                <div class="required">*</div>
             </fieldset>
-            <fieldset>
-                <h3>Bidirectional</h3>
+            <fieldset class="game-option">
+                <div class="game-option__title">Bidirectional</div>
                 <label class="switch">
                     <input type="checkbox" name="viewBidirectional">
                     <span class="slider round"></span>
                 </label>
             </fieldset>
-            <fieldset>
-                <h3>Team Colors</h3>
+            <fieldset class="game-option">
+                <div class="game-option__title">Team Colors</div>
                 <div class="grid">
                     <input type="color" name="team1Color" value="#DC143C">
                     <input type="color" name="team2Color" value="#6495FD">
@@ -75,8 +76,8 @@
                     <input type="color" name="team4Color" value="#FFD700">
                 </div>
             </fieldset>
-            <fieldset>
-                <h3>Game Colors</h3>
+            <fieldset class="game-option">
+                <div class="game-option__title">Game Colors</div>
                 <div class="grid">
                     Nuetral
                     <input type="color" name="neutralColor" value="#D2B48C">
@@ -84,8 +85,8 @@
                     <input type="color" name="deathColor" value="#202020">
                 </div>
             </fieldset>
-            <fieldset>
-                <h3>Show Titles</h3>
+            <fieldset class="game-option">
+                <div class="game-option__title">Show Titles</div>
                 <label class="switch">
                     <input type="checkbox" name="showTitles" checked> 
                     <span class="slider round"></span>

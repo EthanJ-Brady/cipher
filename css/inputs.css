@@ -1,0 +1,38 @@
+input[type="text" i] {
+    border: 0px;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+select {
+    border: 0px;
+    border-radius: 8px;
+    padding: 4px;
+    width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Color Input Styling */
+
+input[type="color" i] {
+    border: 0px;
+    border-radius: 16px;
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
+    padding: 0px;
+}
+
+select::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+::-webkit-color-swatch{
+    border: 2px solid #111;
+    border-radius: 16px;
+}

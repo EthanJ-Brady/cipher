@@ -1,0 +1,36 @@
+/* Settings styling */
+
+.settings {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;   
+}
+
+/* Options typically contained in a settings menu */
+
+.game-option {
+    align-items: center;
+    border: 0px;
+    border-radius: 16px;
+    background-color: var(--lighter-primary-color);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.game-option--required::after {
+    content: "*";
+    color: red;
+    font-size: 2rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.game-option__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 1rem;
+}

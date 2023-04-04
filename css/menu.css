@@ -1,31 +1,8 @@
-fieldset {
-    border: 0px;
-    border-radius: 16px;
-    background-color: var(--lighter-primary-color);
-    position: relative;
-}
-
-#settings {
-    align-items: stretch;
-    display: grid;
-    grid-auto-rows: 1fr;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
-}
-
 .grid {
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
-}
-
-.required {
-    color: red;
-    font-size: 2rem;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
 }
 
 .menu {

@@ -1,0 +1,24 @@
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 1rem;
+}
+
+.header {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+        "menu-button title empty";
+    margin: 0 2rem;
+    justify-items: center;
+}
+
+.header .menu-button{
+    justify-self: left;
+}
+
+.menu-button {
+    cursor: pointer;
+    font-size: 48px;
+}
