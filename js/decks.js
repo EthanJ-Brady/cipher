@@ -1,5 +1,5 @@
 decks = {
-    "Star-Wars": [
+    "Star Wars": [
         "Obi-Wan Kenobi",
         "Qui-Gon Jinn",
         "Padme",
@@ -299,7 +299,7 @@ decks = {
         "Silver Surfer",
         "Kang the Conqueror" 
     ],
-    "Book-of-Mormon": [
+    "Book of Mormon": [
         "Nephi",
         "Lehi",
         "Laman",

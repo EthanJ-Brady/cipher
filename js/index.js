@@ -7,7 +7,7 @@ menuButton.onclick = () => menu.show();
 
 const selectedDecks = settings.selectedDecks;
 for (deck in decks) {
-    option = stringToHtml(`<option value=${deck}>${deck.replaceAll("-", " ")}</option>`);
+    option = stringToHtml(`<option value="${deck}">${deck.replaceAll("-", " ")}</option>`);
     selectedDecks.add(option);
 }
 
