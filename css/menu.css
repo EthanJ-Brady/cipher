@@ -10,7 +10,6 @@
     overflow-y: scroll;
     padding: 0 1rem 1rem 1rem;
     position: fixed;
-    text-align: center;
     top: 0;
     right: 100vw;
     bottom: 0;
@@ -19,8 +18,8 @@
 }
 
 .menu--shown {
-    left: 0vw;
-    right: 67vw
+    left: 0px;
+    right: 0px;
 }
 
 .menu__close {
@@ -44,14 +43,21 @@
     margin: 0;
 }
 
-.menu__mask {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 67vw;
-}
-
 .menu__version {
     opacity: 50%;
+}
+
+@media screen and (min-width: 700px) {
+    .menu--shown {
+        left: 0vw;
+        right: 67vw
+    }
+
+    .menu__mask {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 67vw;
+    }
 }

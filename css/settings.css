@@ -3,10 +3,16 @@
 .settings {
     display: grid;
     grid-auto-rows: 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 1rem;   
 }
 
+@media screen and (min-width: 1400px) {
+    .settings {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+    
 /* Options typically contained in a settings menu */
 
 .game-option {
